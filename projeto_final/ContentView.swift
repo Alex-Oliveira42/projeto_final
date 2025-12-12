@@ -55,7 +55,7 @@ struct TabBar: View {
 struct HomeView: View{
     var body: some View{
         NavigationStack {
-            
+            Text("Home")
             
         }
     }
