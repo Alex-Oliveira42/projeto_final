@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+let materias = ["Grandezas Físicas", "Unidades","Referencial","Movimento e Repouso", "Ponto Material/Corpo Extenso"]
+
+
+
 struct ContentView: View {
     var body: some View {
         NavigationStack{
@@ -51,7 +55,7 @@ struct TabBar: View {
 struct HomeView: View{
     var body: some View{
         NavigationStack {
-            Text("Home")
+            
             
         }
     }
@@ -96,31 +100,32 @@ struct TelaGame: View{
                 .font(.system(size: 14))
                 .foregroundStyle(.gray)
             
-            Spacer()
+            
         }
         
         
         ScrollView{
-            VStack{
-                Text("Matéria")
-                    .foregroundStyle(.white)
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(Color.gray)
-                            
-                    )
-                  
+            LazyVStack(spacing: 30){
+                ForEach(1..<materias.count, id: \.self){ i in
+                    Text(materias[i])
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                }
             }
-            
-        }
+        }.padding()
     }
 }
     
-    
+
+
+
+
 
 
 #Preview {
     ContentView()
     
 }
+
