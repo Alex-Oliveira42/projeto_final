@@ -52,40 +52,14 @@ struct TabBar: View {
     }
 }
 
-struct HomeView: View{
-    var body: some View{
-        NavigationStack {
-            Text("Home")
-            
-        }
-    }
-}
     
     
-struct GameView: View{
-    var body: some View{
-        NavigationStack{
-            TelaGame()
-        }
-    }
-}
 
 
-struct Achievements: View {
-    var body: some View{
-        NavigationStack{
-            Text("Achievements")
-        }
-    }
-}
 
-struct History: View{
-    var body: some View{
-        NavigationStack{
-            Text("History")
-        }
-    }
-}
+
+
+
 
 
 
