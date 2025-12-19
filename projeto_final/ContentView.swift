@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let materias = ["Grandezas Físicas", "Unidades","Referencial","Movimento e Repouso", "Ponto Material/Corpo Extenso"]
+let materias = ["Grandezas Físicas", "Unidades","Referencial","Movimento e Repouso", "Ponto Material/Corpo Extenso", "MRU", "MRUV", "Força peso"]
 
 
 
@@ -52,17 +52,6 @@ struct TabBar: View {
     }
 }
 
-    
-    
-
-
-
-
-
-
-
-
-
 struct TelaGame: View{
     var body: some View{
         VStack{
@@ -79,24 +68,33 @@ struct TelaGame: View{
         
         
         ScrollView{
-            LazyVStack(spacing: 30){
-                ForEach(1..<materias.count, id: \.self){ i in
-                    Text(materias[i])
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(8)
+            ZStack {
+                LazyVStack(spacing: 30){
+                    ForEach(0..<materias.count, id: \.self){ i in
+                        HStack {
+                            if i % 2 != 0{
+                                Spacer()
+                            }
+                            Text(materias[i])
+                                .padding()
+                                .frame(width: 200, height: 60)
+                                .background(Color.gray.opacity(0.28))
+                                .cornerRadius(34)
+                            if i % 2 == 0{
+                                Spacer()
+                            }
+                            
+                        }
+                        .padding(.horizontal)
+                        
+                    }
+                    
                 }
             }
         }.padding()
     }
 }
     
-
-
-
-
-
 
 #Preview {
     ContentView()
