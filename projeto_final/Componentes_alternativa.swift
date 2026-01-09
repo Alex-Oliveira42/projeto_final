@@ -17,41 +17,39 @@ import SwiftUI
 struct Componentes: View {
     var texto : String = "50Nn"
     var alternativa: String = "a"
+    let escolheralternativa: Bool
     @State var texto_visivel: Color = .clear
-    @State var certo_errado = false
-    @State var escolheralternativa = false
+//    @State var escolheralternativa = false
     
     var body: some View {
         
             HStack () {
-                Button (action: { texto_visivel = .black
-                    
-                }) {
                     Text (alternativa)
                         .font(.largeTitle)
                         .foregroundStyle(.white)
-                        .padding (40)
+                        .padding (30)
                         .overlay(Circle().stroke(Color.white))
-                        .onTapGesture {
-                            escolheralternativa.toggle()
-                        }
+//                        .onTapGesture {
+//                            escolheralternativa.toggle()
+//                        }
                     
                     
                     Text(texto)
                         .font(.custom( "Arial", size: 28))
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                        .onTapGesture {escolheralternativa.toggle()
-                        }
+//                        .onTapGesture {escolheralternativa.toggle()}
                     
-                }
+                
                 
                 
             }
-            .frame(maxWidth:400, maxHeight: 80)
-            .onTapGesture {escolheralternativa.toggle()}
+            .frame(maxWidth:450, maxHeight: 80)
+//            .onTapGesture {escolheralternativa.toggle()}
+            
             .background(RoundedRectangle(cornerRadius:200)
-                        .fill(escolheralternativa ? Color.white: Color.black)
+                        .fill(escolheralternativa ? Color.black
+                              : Color.gray)
             )
             .animation(.easeInOut, value: escolheralternativa)
             
@@ -64,5 +62,5 @@ struct Componentes: View {
     }
 
     #Preview {
-        Componentes()
+        Componentes(escolheralternativa: false)
     }
