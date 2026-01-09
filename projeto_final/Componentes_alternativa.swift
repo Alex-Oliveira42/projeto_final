@@ -49,7 +49,7 @@ struct Componentes: View {
             
             .background(RoundedRectangle(cornerRadius:200)
                         .fill(escolheralternativa ? Color.black
-                              : Color.gray)
+                              : Color(red: 58/255, green: 58/255, blue: 58/255))
             )
             .animation(.easeInOut, value: escolheralternativa)
             
