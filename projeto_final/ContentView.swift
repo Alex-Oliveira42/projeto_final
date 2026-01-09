@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-let materias = ["Grandezas Físicas", "Unidades","Referencial","Movimento e Repouso", "Ponto Material/Corpo Extenso", "MRU", "MRUV","Velocidade média", "lançamento oblíquo"]
-
-
-
-
 struct ContentView: View {
     var body: some View {
         NavigationStack{
@@ -54,8 +49,11 @@ struct TabBar: View {
     }
 }
 
+
+
+
 #Preview {
-    TabBar()
+    ContentView()
     
 }
 
