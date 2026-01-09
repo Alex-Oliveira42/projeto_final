@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct HomeView: View {
     @State var perfil: Bool = false // O estado(@State) permite as alterações de tela dentro da view
@@ -21,7 +22,8 @@ struct HomeView: View {
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
-                        Text("data")
+                        Text(Date().formatted(.dateTime.day().month(.wide).locale(Locale(identifier: "pt_BR"))))
+                            .padding(.horizontal)
                             .font(.caption)
                             .fontWeight(.bold)
                             .foregroundColor(.gray)
@@ -42,6 +44,7 @@ struct HomeView: View {
                                 .fontWeight(.bold)
                                 .padding(.trailing, 8)
                                 .foregroundColor(.white)
+                                .frame(width: 40, height: 40)
                         }
                         .tint(.black)
                         .navigationDestination(isPresented: $notif) {
@@ -71,14 +74,17 @@ struct HomeView: View {
             Spacer()
             
             VStack {
-                createTitle(title: "Continue...3")
-                InitialButtons(image: "car", texto: "Física")
-                createTitle(title: "Outros...3", showFlame: false)
+                createTitle(title: "        Continue  3")
+                InitialButtons(image: "car", texto: "Física - Básica")
+                createTitle(title: "        Outros", showFlame: false)
                 InitialButtons(image: "atom", texto: "Quimica - Básica")
                 InitialButtons(image: "plus", texto: "Matemática")
             
+                DashboardSection()
                 
                 Spacer()
+                
+                
                 
                 }.preferredColorScheme(.dark)
             }
@@ -93,7 +99,7 @@ struct HomeView: View {
                 .foregroundColor(.white)
             if (showFlame) {
                 Image(systemName:"flame")
-                    .frame(width: 40, height: 40)
+                    .frame(width: 0, height: 40)
             }
             Spacer()
                 .padding(.horizontal)
@@ -134,16 +140,79 @@ struct HomeView: View {
                     }
                     
                     .padding()
-                    .frame(width: 250, height: 50)
-                    .background(Color.gray)
+                    .frame(width: 350, height: 50)
+                    .background(Color(red: 58/255, green: 58/255, blue: 58/255))
+                    
                     .cornerRadius(50)
                 }
             }
         }
     }
 
+struct DashboardSection: View {
+    var body: some View {
+        HStack(spacing: 16) {
+            GraficoFrequencia()
+        }
+        .padding()
+    }
+}
 
+struct FrequenciaDia: Identifiable {
+    let id = UUID()
+    let dia: String
+    var acessos: Int
+}
+
+
+struct GraficoFrequencia: View {
     
+
+        @State private var frequencia: [FrequenciaDia] = [
+            FrequenciaDia(dia: "Seg", acessos: 0),
+            FrequenciaDia(dia: "Ter", acessos: 0),
+            FrequenciaDia(dia: "Qua", acessos: 0),
+            FrequenciaDia(dia: "Qui", acessos: 0),
+            FrequenciaDia(dia: "Sex", acessos: 0),
+            FrequenciaDia(dia: "Sáb", acessos: 0),
+            FrequenciaDia(dia: "Dom", acessos: 0)
+        ]
+
+        var body: some View {
+            
+                Chart(frequencia) { item in
+                    BarMark(
+                        x: .value("Dia", item.dia),
+                        y: .value("Acessos", item.acessos)
+                    )
+                    .cornerRadius(6)
+                    .foregroundStyle(.green)
+                }
+            .chartYAxis(.hidden)
+            .frame(height: 160)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(.ultraThinMaterial)
+            )
+            .onAppear {
+                registrarAcesso()
+            }
+        }
+
+        private func registrarAcesso() {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "pt_BR")
+            formatter.dateFormat = "EEE"
+
+            let hoje = formatter.string(from: Date()).capitalized
+
+            if let index = frequencia.firstIndex(where: { $0.dia.hasPrefix(hoje) }) {
+                frequencia[index].acessos += 1
+            }
+        }
+    }
+
     
     struct Tela_Perfil: View{
         var body: some View{
@@ -170,10 +239,9 @@ struct HomeView: View {
         
         
     }
-//
-//  home.swift
-//  projeto_final
-//
-//  Created by user on 19/12/25.
-//
-
+    //
+    //  home.swift
+    //  projeto_final
+    //
+    //  Created by user on 19/12/25.
+    //
