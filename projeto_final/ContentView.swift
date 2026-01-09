@@ -11,6 +11,7 @@ let materias = ["Grandezas Físicas", "Unidades","Referencial","Movimento e Repo
 
 
 
+
 struct ContentView: View {
     var body: some View {
         NavigationStack{
@@ -36,7 +37,7 @@ struct TabBar: View {
                 .tabItem{
                     Image(systemName: "gamecontroller")
                     Text("Game")
-                TelaGame()
+                
                 }
             Achievements()
                 .tabItem{
@@ -54,7 +55,7 @@ struct TabBar: View {
 }
 
 #Preview {
-    ContentView()
+    TabBar()
     
 }
 

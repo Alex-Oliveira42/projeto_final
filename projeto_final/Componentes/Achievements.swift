@@ -9,7 +9,8 @@ import SwiftUI
 struct Achievements: View {
     var body: some View{
         NavigationStack{
-            Text("Achievements")
+            
+        TelaAchievements()
         }
     }
 }

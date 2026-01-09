@@ -7,18 +7,7 @@
 
 import SwiftUI
 
-struct ContentView1: View {
-    var body: some View {
-        NavigationStack{
-            ZStack{
-                TabBar()
-            }
-            
-        }.preferredColorScheme(.dark)
-    }
-
-}
-    
+  
     
 struct TelaGame: View{
     var body: some View{
@@ -48,6 +37,10 @@ struct TelaGame: View{
                                 .frame(width: 200, height: 60)
                                 .background(Color.gray.opacity(0.28))
                                 .cornerRadius(34)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 34)
+                                        .stroke(Color.white.opacity(0.2))
+                                )
                             if i % 2 == 0{
                                 Spacer()
                             }
